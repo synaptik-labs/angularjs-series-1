@@ -1,8 +1,14 @@
 <html ng-app="todo">
     <head>
         <script type="text/javascript" src="bundle.js"></script>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,400italic"/>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/angular-material/1.1.5/angular-material.min.css"/>
+
     </head>
     <body>
-        <div ng-view></div>
+        <md-toolbar class="md-whiteframe-4dp">
+            <div class="md-toolbar-tools">To do</div>
+        </md-toolbar>
+        <div ng-view class="md-padding"></div>
     </body>
 </html>
