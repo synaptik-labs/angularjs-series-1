@@ -6,4 +6,15 @@
 	<md-button class="md-primary md-raised" ng-click="onClickAdd()">Add</md-button>
 	<md-divider></md-divider>
 	<!-- INSERT LIST HERE -->
+	<div layout="row" layout-wrap>
+		<md-card ng-repeat="item in data">
+			<md-card-title>
+				{{item.description}}
+			</md-card-title>
+			<md-card-actions>
+				<md-button ng-click="onClickRemove()">Remove</md-button>
+				<md-button ng-click="onClickUpdate()">Update</md-button>
+			</md-card-actions>
+		</md-card>
+	</div>
 </span>
