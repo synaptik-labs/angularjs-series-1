@@ -1,4 +1,4 @@
-var controller = function($scope, $http) {
+var controller = function($scope, $http, $mdDialog) {
 	$scope.newDescription = "";
 	$scope.data = [];
 
@@ -24,6 +24,33 @@ var controller = function($scope, $http) {
 		$http.post("http://localhost:8080/todo", data).then(function(response) {
 			$scope.refresh();
 			$scope.newDescription = "";
+		});
+	}
+
+	$scope.onClickRemove = function(item) {
+		$http.delete("http://localhost:8080/todo/" + item.id).then(function(response) {
+			$scope.refresh();
+		});
+	}
+
+	$scope.onClickUpdate = function(item) {
+		var confirm = $mdDialog.prompt()
+			.title('Update entry')
+			.textContent('Description')
+			.placeholder('Description')
+			.ariaLabel('Description')
+			.initialValue(item.description)
+			.required(true)
+			.ok('Okay')
+			.cancel('Cancel');
+
+		$mdDialog.show(confirm).then(function(newDescription) {
+			var data = { description: newDescription };
+			$http.put("http://localhost:8080/todo/" + item.id, data).then(function(response) {
+				$scope.refresh();
+			});
+		}).catch(function(error) {
+			console.log("User pressed cancel!");
 		});
 	}
 }
